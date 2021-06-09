@@ -46,17 +46,6 @@ public class TimePairTest {
                 "Error text: " + aTimePairException.getMessageText());
     }
 
-    @Test
-    public void timeDifferenceTest_missingParam() {
-
-        TimePair.TimePairException aTimePairException = assertThrows(TimePair.TimePairException.class,
-                () -> aTimePair.getTimeDifference());
-
-        assertEquals(500, (long) aTimePairException.getMessageNr());
-        System.out.println("Missing Parameter - Error Number: " + aTimePairException.getMessageNr() + " " +
-                "Error text: " + aTimePairException.getMessageText());
-    }
-
      @Test
     public void timeDifferenceTest_invalidTimePeriod() {
         aTimePair.setTimeValues("19:00", "03:00");
@@ -85,8 +74,6 @@ public class TimePair {
     private String startTime = null;
     private String endTime = null;
 
-    public TimePair() {}
-
     public void setTimeValues (String strStartTime, String strEndTime) {
         startTime = strStartTime;
         endTime = strEndTime;
@@ -98,10 +85,6 @@ public class TimePair {
     }
 
     public double getTimeDifference() {
-
-        if (startTime == null || endTime == null) {
-            throw new TimePairException("Start oder End Time not set", 500);
-        }
 
         try { LocalTime checkStartTime = LocalTime.parse(startTime);
         }
